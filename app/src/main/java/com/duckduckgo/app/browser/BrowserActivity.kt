@@ -37,8 +37,6 @@ import com.duckduckgo.app.fire.DataClearer
 import com.duckduckgo.app.global.ApplicationClearDataState
 import com.duckduckgo.app.global.DuckDuckGoActivity
 import com.duckduckgo.app.global.intentText
-import com.duckduckgo.app.global.rating.AppEnjoyment
-import com.duckduckgo.app.global.rating.AppEnjoyment.AppEnjoymentPromptOptions.*
 import com.duckduckgo.app.global.view.*
 import com.duckduckgo.app.playstore.PlayStoreUtils
 import com.duckduckgo.app.privacy.ui.PrivacyDashboardActivity
@@ -87,7 +85,7 @@ class BrowserActivity : DuckDuckGoActivity(), EnjoymentDialogFragment.Listener, 
         super.onCreate(savedInstanceState = newInstanceState, daggerInject = false)
         setContentView(R.layout.activity_browser)
         viewModel.viewState.observe(this, Observer {
-            renderer.renderBrowserViewState(it, this)
+            renderer.renderBrowserViewState(it)
         })
         viewModel.awaitClearDataFinishedNotification()
     }
@@ -320,7 +318,7 @@ class BrowserActivity : DuckDuckGoActivity(), EnjoymentDialogFragment.Listener, 
         private var lastSeenBrowserState: BrowserViewModel.ViewState? = null
         private var processedOriginalIntent = false
 
-        fun renderBrowserViewState(viewState: BrowserViewModel.ViewState, context: Context) {
+        fun renderBrowserViewState(viewState: BrowserViewModel.ViewState) {
             renderIfChanged(viewState, lastSeenBrowserState) {
                 lastSeenBrowserState = viewState
 
@@ -349,15 +347,6 @@ class BrowserActivity : DuckDuckGoActivity(), EnjoymentDialogFragment.Listener, 
                 launchNewSearchOrQuery(intent)
                 processedOriginalIntent = true
             }
-        }
-    }
-
-    private fun determineDialogType(promptType: AppEnjoyment.AppEnjoymentPromptOptions): DialogFragment? {
-        return when (promptType) {
-            is ShowNothing -> null
-            ShowEnjoymentPrompt -> EnjoymentDialogFragment.create()
-            ShowFeedbackPrompt -> null
-            ShowRatingPrompt -> RateAppDialogFragment.create()
         }
     }
 

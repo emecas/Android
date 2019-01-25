@@ -36,6 +36,7 @@ import com.duckduckgo.app.httpsupgrade.model.HttpsWhitelistedDomain
 import com.duckduckgo.app.privacy.db.NetworkLeaderboardDao
 import com.duckduckgo.app.privacy.db.NetworkLeaderboardEntry
 import com.duckduckgo.app.privacy.db.SiteVisitedEntity
+import com.duckduckgo.app.search.SearchCountEntity
 import com.duckduckgo.app.tabs.db.TabsDao
 import com.duckduckgo.app.tabs.model.TabEntity
 import com.duckduckgo.app.tabs.model.TabSelectionEntity
@@ -43,7 +44,7 @@ import com.duckduckgo.app.trackerdetection.db.TrackerDataDao
 import com.duckduckgo.app.trackerdetection.model.DisconnectTracker
 
 @Database(
-    exportSchema = true, version = 8, entities = [
+    exportSchema = true, version = 9, entities = [
         DisconnectTracker::class,
         HttpsBloomFilterSpec::class,
         HttpsWhitelistedDomain::class,
@@ -55,7 +56,8 @@ import com.duckduckgo.app.trackerdetection.model.DisconnectTracker
         BookmarkEntity::class,
         EntityListEntity::class,
         Survey::class,
-        DismissedCta::class
+        DismissedCta::class,
+        SearchCountEntity::class
     ]
 )
 

@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) 2019 DuckDuckGo
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.duckduckgo.app.search
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Query
+import javax.inject.Singleton
+
+
+@Dao
+@Singleton
+abstract class SearchCountDao {
+
+    @Query("SELECT 'numberSearchesMade' FROM 'search_count' LIMIT 1")
+    abstract fun getSearchesMade(): LiveData<Int>
+
+    @Query("UPDATE search_count SET numberSearchesMade = numberSearchesMade + 1 WHERE primaryKey = " + SearchCountEntity.PRIMARY_KEY)
+    abstract fun incrementSearchCount()
+
+}

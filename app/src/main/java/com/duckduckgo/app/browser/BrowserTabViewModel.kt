@@ -57,6 +57,7 @@ import com.duckduckgo.app.privacy.db.NetworkLeaderboardDao
 import com.duckduckgo.app.privacy.db.NetworkLeaderboardEntry
 import com.duckduckgo.app.privacy.db.SiteVisitedEntity
 import com.duckduckgo.app.privacy.model.PrivacyGrade
+import com.duckduckgo.app.search.SearchCountDao
 import com.duckduckgo.app.settings.db.SettingsDataStore
 import com.duckduckgo.app.statistics.api.StatisticsUpdater
 import com.duckduckgo.app.tabs.model.TabEntity
@@ -84,7 +85,8 @@ class BrowserTabViewModel(
     private val faviconDownloader: FaviconDownloader,
     private val addToHomeCapabilityDetector: AddToHomeCapabilityDetector,
     private val ctaViewModel: CtaViewModel,
-    appConfigurationDao: AppConfigurationDao
+    appConfigurationDao: AppConfigurationDao,
+    private val searchCountDao: SearchCountDao
 ) : WebViewClientListener, SaveBookmarkListener, ViewModel() {
 
     data class GlobalLayoutViewState(
@@ -252,6 +254,8 @@ class BrowserTabViewModel(
 
         command.value = HideKeyboard
         val trimmedInput = input.trim()
+
+        asdfasdf
 
         val type = specialUrlDetector.determineType(trimmedInput)
         if (type is IntentType) {
